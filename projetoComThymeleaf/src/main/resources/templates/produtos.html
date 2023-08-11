@@ -10,7 +10,7 @@
 <body>
 
 	<div class="container">
-		<div class="card" th:each="produto : ${produtos}">
+		<div class="card" th:each="produto : ${produtos}" style="margin: 15px 0px; height:60%">
 			<div class="card-header" th:text="${produto.nome}"></div>
 			<div class="card-body">
 				<div class="row">
@@ -33,6 +33,32 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="row">
+				<div class="col" style="margin: 0px 0px 10px 50px">
+					<a th:href="@{/editar/{id}(id=${produto.id})}" class="btn btn-primary">Editar</a>
+					<button data-bs-toggle="modal" class="btn btn-danger" th:attr="data-bs-target='#modalExcluir'+${produto.id}">Deletar</button>
+				</div>
+			</div>
+			
+			<div class="modal" tabindex="-1" th:attr="id='modalExcluir'+${produto.id}">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title">Excluir produto?</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        <p>Deseja realmente excluir o produto: <span th:text="${produto.nome}"></span>?</p>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+			        <a th:href="@{/delete/{id}(id=${produto.id})}" type="button" class="btn btn-warning">Confirmar</a>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			
 		</div>
 	
 	</div>
